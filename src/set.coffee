@@ -27,6 +27,7 @@ install = (_, jasmine) ->
   context = @
 
   globalPatches =
+    __autoIncrement: -1
 
     # set enables a Suite-refinable storage mechanism.
     # @param name [String] the name of the var you are defining
@@ -34,7 +35,6 @@ install = (_, jasmine) ->
     # @option opts :now [Boolean] evaluate the anon func immediately (false)
     # @return [void]
     set: (name, opts, fn) ->
-
       # Install callbacks to make sure our global variable is set-up/torn down correctly.
       beforeEach ->
         suite = jasmine?.getEnv()?.currentSpec?.suite
@@ -78,7 +78,11 @@ install = (_, jasmine) ->
             cachedId = null
             cachedResult = null
             oncePerSuiteWrapper = ->
-              id = jasmine?.getEnv()?.currentSpec?.id || globalPatches.__autoIncrement++
+              specId = jasmine?.getEnv()?.currentSpec?.id
+              if specId == 0
+                id = specId
+              else
+                id = specId || globalPatches.__autoIncrement++
               if id != cachedId
                 cachedResult = fn()
                 cachedId = id

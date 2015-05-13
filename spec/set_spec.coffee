@@ -82,7 +82,7 @@ describe 'jasmine-set with cross-referencing, reverse sets', ->
 describe 'jasmine-set with cross-referencing, reverse sets, that are referenced in a beforeEach', ->
 
   set 'a', -> 1
-  set 'b', -> a + 1  
+  set 'b', -> a + 1
 
   beforeEach -> `b+=1`
 
@@ -117,3 +117,13 @@ describe 'an outer beforeEach that depends on a nested set call', ->
 
       _.times 3, -> it 'sets a to 2', -> expect(a).toEqual(2)
       _.times 3, -> it 'sets b to 1', -> expect(b).toEqual(1)
+
+describe 'jasmine-set with a object being set', ->
+  describe 'a top-level set (a=Object)', ->
+
+    set 'a', -> new Object({})
+
+    describe 'within an immediate suite', ->
+      _.times 3, -> it 'sets a to the same instance of an object', ->
+        a.prop = 1
+        expect(a.prop).toEqual(1)

@@ -24,6 +24,7 @@
     namespaceStack = {};
     context = this;
     globalPatches = {
+      __autoIncrement: -1,
       set: function(name, opts, fn) {
         var ret;
         beforeEach(function() {
@@ -79,8 +80,13 @@
               cachedId = null;
               cachedResult = null;
               oncePerSuiteWrapper = function() {
-                var id, _ref, _ref1;
-                id = (jasmine != null ? (_ref = jasmine.getEnv()) != null ? (_ref1 = _ref.currentSpec) != null ? _ref1.id : void 0 : void 0 : void 0) || globalPatches.__autoIncrement++;
+                var id, specId, _ref, _ref1;
+                specId = jasmine != null ? (_ref = jasmine.getEnv()) != null ? (_ref1 = _ref.currentSpec) != null ? _ref1.id : void 0 : void 0 : void 0;
+                if (specId === 0) {
+                  id = specId;
+                } else {
+                  id = specId || globalPatches.__autoIncrement++;
+                }
                 if (id !== cachedId) {
                   cachedResult = fn();
                   cachedId = id;
