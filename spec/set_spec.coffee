@@ -119,11 +119,44 @@ describe 'an outer beforeEach that depends on a nested set call', ->
       _.times 3, -> it 'sets b to 1', -> expect(b).toEqual(1)
 
 describe 'jasmine-set with a object being set', ->
-  describe 'a top-level set (a=Object)', ->
 
     set 'a', -> new Object({})
 
-    describe 'within an immediate suite', ->
-      _.times 3, -> it 'sets a to the same instance of an object', ->
-        a.prop = 1
-        expect(a.prop).toEqual(1)
+    _.times 3, -> it 'sets a to the same instance of an object', ->
+      a.prop = 1
+      expect(a.prop).toEqual(1)
+
+    describe 'a nested refining set', ->
+      set 'a', -> new Object({nested:true})
+
+      _.times 3, ->  it 'sets a to the same instance of the nested set object', ->
+        a.nestedProp = 1
+        expect(a.nestedProp=1).toEqual(1)
+        expect(a.nested).toEqual(true)
+
+      describe 'a nested set that does not change a', ->
+        _.times 3, -> it 'sets a to Object', ->
+          expect(a.prop).toBeUndefined()
+
+        describe 'a nested refining set', ->
+          set 'a', -> new Object({refined:true})
+
+          _.times 3, -> it 'sets a to Object with a refined property', ->
+            expect(a.prop).toBeUndefined()
+            expect(a.nestedProp).toBeUndefined()
+            expect(a.refined).toEqual(true)
+
+          describe 'a nested set that does not change a', ->
+            _.times 3, -> it 'sets a to Object with a refined property', ->
+              expect(a.prop).toBeUndefined()
+              expect(a.nestedProp).toBeUndefined()
+              expect(a.refined).toEqual(true)
+
+describe 'jasmine-set plugin with a set (a=Object)', ->
+  set 'a', -> new Object({})
+
+  describe 'with no immediate sub-specs, just a sub-context', ->
+
+    _.times 3, -> it 'sets a to the same instance of a', ->
+      a.prop = 1
+      expect(a.prop).toEqual(1)
