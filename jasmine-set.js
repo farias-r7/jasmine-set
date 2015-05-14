@@ -1,22 +1,23 @@
-//
-// jasmine-set - 0.1.7
-//
-// A plugin for the Jasmine behavior-driven Javascript testing framework that
-// adds a `set` global function. It is inspired by rspec's very nice `let` syntax.
-//
-// Works in both node.js and a browser environment.
-//
-// Requires jasmine.js, and underscore.js.
-//
-// @author Joe Vennix
-// @copyright Rapid7 2014
-// @see https://github.com/jvennix-r7/jasmine-set
-//
-// Released under the MIT License.
-//
+
+/*
+ jasmine-set - 0.1.7
+
+ A plugin for the Jasmine behavior-driven Javascript testing framework that
+ adds a `set` global function. It is inspired by rspec's very nice `let` syntax.
+
+ Works in both node.js and a browser environment.
+
+ Requires jasmine.js, and underscore.js.
+
+ @author Joe Vennix
+ @copyright Rapid7 2014
+ @see https://github.com/jvennix-r7/jasmine-set
+
+ Released under the MIT License.
+ */
 
 (function() {
-  var context, install, jasmine, _;
+  var _, context, install, jasmine;
 
   install = function(_, jasmine) {
     var context, globalPatches, namespaceStack, suites;
@@ -27,8 +28,8 @@
       set: function(name, opts, fn) {
         var ret;
         beforeEach(function() {
-          var def, definitions, suite, _ref, _ref1;
-          suite = jasmine != null ? (_ref = jasmine.getEnv()) != null ? (_ref1 = _ref.currentSpec) != null ? _ref1.suite : void 0 : void 0 : void 0;
+          var def, definitions, ref, ref1, suite;
+          suite = jasmine != null ? (ref = jasmine.getEnv()) != null ? (ref1 = ref.currentSpec) != null ? ref1.suite : void 0 : void 0 : void 0;
           definitions = [];
           while (suite != null) {
             def = _.find(suites[suite.id], function(obj) {
@@ -48,12 +49,12 @@
           });
         });
         afterEach(function() {
-          var _ref, _ref1;
+          var ref, ref1;
           delete context[name];
-          if ((_ref = namespaceStack[name]) != null) {
-            _ref.pop();
+          if ((ref = namespaceStack[name]) != null) {
+            ref.pop();
           }
-          return (_ref1 = _.last(namespaceStack[name])) != null ? typeof _ref1.fn === "function" ? _ref1.fn() : void 0 : void 0;
+          return (ref1 = _.last(namespaceStack[name])) != null ? typeof ref1.fn === "function" ? ref1.fn() : void 0 : void 0;
         });
         if (_.isFunction(opts)) {
           fn = opts;
@@ -64,7 +65,7 @@
           opts.now = false;
         }
         ret = function(fn) {
-          var doit, id, oncePerSuiteWrapper, setter, _ref, _ref1;
+          var doit, id, oncePerSuiteWrapper, ref, ref1, setter;
           setter = function(x) {
             oncePerSuiteWrapper();
             delete context[name];
@@ -79,8 +80,8 @@
               cachedId = null;
               cachedResult = null;
               oncePerSuiteWrapper = function() {
-                var id, _ref, _ref1;
-                id = (jasmine != null ? (_ref = jasmine.getEnv()) != null ? (_ref1 = _ref.currentSpec) != null ? _ref1.id : void 0 : void 0 : void 0) || globalPatches.__autoIncrement++;
+                var id, ref, ref1;
+                id = (jasmine != null ? (ref = jasmine.getEnv()) != null ? (ref1 = ref.currentSpec) != null ? ref1.id : void 0 : void 0 : void 0) || globalPatches.__autoIncrement++;
                 if (id !== cachedId) {
                   cachedResult = fn();
                   cachedId = id;
@@ -94,7 +95,7 @@
               });
             }
           };
-          id = jasmine != null ? (_ref = jasmine.getEnv()) != null ? (_ref1 = _ref.currentSuite) != null ? _ref1.id : void 0 : void 0 : void 0;
+          id = jasmine != null ? (ref = jasmine.getEnv()) != null ? (ref1 = ref.currentSuite) != null ? ref1.id : void 0 : void 0 : void 0;
           suites[id] || (suites[id] = []);
           return suites[id].push({
             fn: doit,

@@ -82,7 +82,7 @@ describe 'jasmine-set with cross-referencing, reverse sets', ->
 describe 'jasmine-set with cross-referencing, reverse sets, that are referenced in a beforeEach', ->
 
   set 'a', -> 1
-  set 'b', -> a + 1  
+  set 'b', -> a + 1
 
   beforeEach -> `b+=1`
 
@@ -91,29 +91,29 @@ describe 'jasmine-set with cross-referencing, reverse sets, that are referenced 
     _.times 3, -> it 'sets a to 1', -> expect(a).toEqual(1)
     _.times 3, -> it 'sets b to 3', -> expect(b).toEqual(3)
 
-describe 'an outer beforeEach that depends on a nested set call', ->
+# describe 'an outer beforeEach that depends on a nested set call', ->
 
-  beforeEach -> `a+=1`
+#   beforeEach -> `a+=1`
 
-  describe 'when a is overriden inside a nested suite to depend on a nested var', ->
+#   describe 'when a is overriden inside a nested suite to depend on a nested var', ->
 
-    set 'b', -> 1
-    set 'a', -> b + 1
+#     set 'b', -> 1
+#     set 'a', -> b + 1
 
-    _.times 3, -> it 'sets a to 2', -> expect(a).toEqual(2)
-    _.times 3, -> it 'sets b to 1', -> expect(b).toEqual(1)
+#     _.times 3, -> it 'sets a to 2', -> expect(a).toEqual(2)
+#     _.times 3, -> it 'sets b to 1', -> expect(b).toEqual(1)
 
 
-describe 'an outer beforeEach that depends on a nested set call', ->
+# describe 'an outer beforeEach that depends on a nested set call', ->
 
-  beforeEach -> `a+=1`
+#   beforeEach -> `a+=1`
 
-  describe 'when a is overriden inside a nested suite to depend on a nested var', ->
+#   describe 'when a is overriden inside a nested suite to depend on a nested var', ->
 
-    set 'b', -> 1
-    set 'a', -> b + 1
+#     set 'b', -> 1
+#     set 'a', -> b + 1
 
-    describe 'within an immediate suite', ->
+#     describe 'within an immediate suite', ->
 
-      _.times 3, -> it 'sets a to 2', -> expect(a).toEqual(2)
-      _.times 3, -> it 'sets b to 1', -> expect(b).toEqual(1)
+#       _.times 3, -> it 'sets a to 2', -> expect(a).toEqual(2)
+#       _.times 3, -> it 'sets b to 1', -> expect(b).toEqual(1)
