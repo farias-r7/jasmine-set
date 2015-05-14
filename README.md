@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/jvennix-r7/jasmine-set.svg?branch=master)](https://travis-ci.org/jvennix-r7/jasmine-set)
+[![Build Status](https://travis-ci.org/joevennix/jasmine-set.svg?branch=master)](https://travis-ci.org/joevennix/jasmine-set)
 
 jasmine-set brings rspec's `let` syntax to the [Jasmine](http://jasmine.github.io/) behavior-driven development framework for testing JavaScript code. The `set` global function is provided, which allows the spec writer to define lazy global accessors that can be refined in nested specs. To achieve this behavior, the `Suite.prototype.finish` function from Jasmine is wrapped.
 
@@ -27,11 +27,11 @@ In Ecmascript, `let` is a reserved word that allows for block-level scoping (as 
 ### Building from source
 
     $ npm i
-    $ ./jake build
+    $ grunt build
 
 ### Running specs
 
-    $ ./jake spec [DEBUG=1] [SPEC=./spec/set.coffee]
+    $ grunt test
 
 ### License
 

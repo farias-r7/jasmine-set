@@ -1,6 +1,6 @@
 {
   "name": "jasmine-set",
-  "version": "0.1.9",
+  "version": "0.1.8",
   "description": "Adds rspec-style let function to Jasmine",
   "homepage": "https://github.com/joevennix/jasmine-set",
   "author": {
@@ -12,9 +12,10 @@
     "underscore": "~1.6"
   },
   "devDependencies": {
-    "coffee-script": "~ 1.6.3",
-    "jasmine-node": "~ 1.14.1",
-    "jake": "0.7.6"
+    "grunt": "~ 0.4.0",
+    "grunt-cli": "~ 0.1.13",
+    "grunt-contrib-coffee": "~ 0.13.0",
+    "grunt-jasmine-node": "~ 0.3.1"
   },
   "keywords": [
     "jasmine",
@@ -35,8 +36,8 @@
       "url": "http://en.wikipedia.org/wiki/MIT_License"
     }
   ],
-  "engine": "node >= 0.12.2",
+  "engine": "node >= 0.8.0",
   "scripts": {
-    "test": "./jake spec"
+    "test": "grunt test"
   }
 }
