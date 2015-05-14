@@ -1,5 +1,5 @@
 ###
- jasmine-set - 0.1.7
+ jasmine-set - 0.1.9
 
  A plugin for the Jasmine behavior-driven Javascript testing framework that
  adds a `set` global function. It is inspired by rspec's very nice `let` syntax.
