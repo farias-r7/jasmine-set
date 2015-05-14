@@ -27,11 +27,11 @@ In Ecmascript, `let` is a reserved word that allows for block-level scoping (as 
 ### Building from source
 
     $ npm i
-    $ ./jake build
+    $ grunt build
 
 ### Running specs
 
-    $ ./jake spec [DEBUG=1] [SPEC=./spec/set.coffee]
+    $ grunt test
 
 ### License
 
