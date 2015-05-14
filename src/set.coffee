@@ -27,7 +27,7 @@ install = (_, jasmine) ->
   context = @
 
   globalPatches =
-    __autoIncrement: -1
+    __autoIncrement: 0
 
     # set enables a Suite-refinable storage mechanism.
     # @param name [String] the name of the var you are defining
@@ -78,11 +78,7 @@ install = (_, jasmine) ->
             cachedId = null
             cachedResult = null
             oncePerSuiteWrapper = ->
-              specId = jasmine?.getEnv()?.currentSpec?.id
-              if specId == 0
-                id = specId
-              else
-                id = specId || globalPatches.__autoIncrement++
+              id = jasmine?.getEnv()?.currentSpec?.id ? globalPatches.__autoIncrement++
               if id != cachedId
                 cachedResult = fn()
                 cachedId = id
