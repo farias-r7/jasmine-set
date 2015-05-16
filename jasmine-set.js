@@ -1,6 +1,6 @@
 
 /*
- jasmine-set - 0.1.10
+ jasmine-set - 0.1.11
 
  A plugin for the Jasmine behavior-driven Javascript testing framework that
  adds a `set` global function. It is inspired by rspec's very nice `let` syntax.
@@ -20,12 +20,12 @@
   var _, context, install, jasmine;
 
   install = function(_, jasmine) {
-    var context, globalPatches, namespaceStack, suites;
+    var autoincrement, context, globalPatches, namespaceStack, suites;
     suites = {};
     namespaceStack = {};
     context = this;
+    autoincrement = 0;
     globalPatches = {
-      __autoIncrement: 0,
       set: function(name, opts, fn) {
         var ret;
         beforeEach(function() {
@@ -82,7 +82,7 @@
               cachedResult = null;
               oncePerSuiteWrapper = function() {
                 var id, ref, ref1, ref2;
-                id = (ref = jasmine != null ? (ref1 = jasmine.getEnv()) != null ? (ref2 = ref1.currentSpec) != null ? ref2.id : void 0 : void 0 : void 0) != null ? ref : globalPatches.__autoIncrement++;
+                id = (ref = jasmine != null ? (ref1 = jasmine.getEnv()) != null ? (ref2 = ref1.currentSpec) != null ? ref2.id : void 0 : void 0 : void 0) != null ? ref : autoincrement++;
                 if (id !== cachedId) {
                   cachedResult = fn();
                   cachedId = id;
